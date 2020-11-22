@@ -1,89 +1,152 @@
-let equation = '' 
+let a='';
+let result;
+let equation;
 
 function clear(){
-    equation = ''
+    a = '';
+    result = '';
+    equation='';
     document.getElementById('screen').innerHTML = '';
 }
 
+function assignResultToA() {
+    result = Number(a);
+    a = '';
+    return result, a;
+}
+
 function addOne(){
-    equation += '1'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '1';
+    equation +='1';
 }
 
 function addTwo(){
-    equation += '2'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+='2';
+    equation +='2';
     }
 
 function addThree(){
-    equation += '4'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+='3'
+    equation +='3';
     }
 
 function addFour(){
-    equation += '4'
-    document.getElementById('screen').innerHTML = equation;
+   document.getElementById('screen').innerHTML = a+= '4'
+   equation +='4';
     }
 
 function addFive(){
-    equation += '5'
-        document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '5';
+    equation +='5';
     }
     
 function addSix(){
-    equation += '6'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '6';
+    equation +='6';
     }
     
 function addSeven(){
-    equation += '7'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '7';
+    equation +='7';
     }
 
 function addEight(){
-    equation += '8'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '8';
+    equation +='8';
     }    
 
 function addNine(){
-    equation += '9'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '9';
+    equation +='9';
     }
 
 function addZero(){
-    equation += '0'
-    document.getElementById('screen').innerHTML = equation;
+    document.getElementById('screen').innerHTML = a+= '0';
+    equation +='0';
     }    
 
 function addPlus(){
-    equation += '+'
-    document.getElementById('screen').innerHTML = equation;
-    }
+   if (typeof (result) == 'number') {
+        result = result + Number(a);
+        document.getElementById('screen').innerHTML = result;
+        a='';
+        turnOnDot();
+        return result, a;
+    } else {
+        equation += '+';
+        assignResultToA();
+        turnOnDot
+    }}
 
 function addMinus(){
-    equation += '-'
-    document.getElementById('screen').innerHTML = equation;
-    }
+    if (typeof (result) == 'number') {
+        result = result - Number(a);
+        document.getElementById('screen').innerHTML = result;
+        a='';
+        turnOnDot();
+        return result, a;
+    } else {
+        equation += '-';
+        assignResultToA();
+        turnOnDot();
+    }}
 
 function addMultiply(){
-    equation += '*'
-    document.getElementById('screen').innerHTML = equation;
-    }
+    if (typeof (result) == 'Number') {
+        result = Number(result) * Number(a);
+        document.getElementById('screen').innerHTML = result;
+        a='';
+        turnOnDot();
+        return result, a;
+    } else {
+        equation += '*';
+        assignResultToA();
+        turnOnDot();
+    }}
 
 function addDivision(){
-    equation += '/'
-    document.getElementById('screen').innerHTML = equation;
-    }
+    if (typeof (result) == 'Number') {
+        result = Number(result) / Number(a);
+        document.getElementById('screen').innerHTML = result;
+        a='';
+        turnOnDot();
+        return result, a;
+    } else {
+        equation += '/';
+        assignResultToA();
+        turnOnDot();
+    }}
 
 function addDot(){
-    equation += '.'
-    document.getElementById('screen').innerHTML = equation;
+    a += '.'
+    document.getElementById('screen').innerHTML = a;
+    equation += '.';
+    turnOffDot();
     }
 
 function operate(){
-    document.getElementById('screen').innerHTML = 'This will be the result';
+    equation += '=';
+    document.getElementById('screen').innerHTML = equation;
+    turnOnDot();
+}
+
+function backspace() {
+    a = document.getElementById('screen').innerHTML
+    a = a.slice(0,-1);
+    document.getElementById('screen').innerHTML = a;
+
 
 }
+
+function turnOnDot(){
+    document.getElementById('.').addEventListener('click',addDot);
+}
+
+function turnOffDot(){
+    document.getElementById('.').removeEventListener('click',addDot);
+}
+
+
 
 document.getElementById('1').addEventListener('click',addOne);
 document.getElementById('2').addEventListener('click',addTwo);
@@ -101,5 +164,5 @@ document.getElementById('x').addEventListener('click',addMultiply);
 document.getElementById('/').addEventListener('click',addDivision);
 document.getElementById('.').addEventListener('click',addDot);
 document.getElementById('=').addEventListener('click',operate);
-
 document.getElementById('Clear').addEventListener('click',clear);
+document.getElementById('Backspace').addEventListener('click',backspace);
