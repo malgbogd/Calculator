@@ -1,18 +1,15 @@
-let a='';
-let result;
-let equation;
+let a=''; //always on the screen
+let result; 
+let equation = '';
+let newEquation =[];
 
 function clear(){
     a = '';
     result = '';
     equation='';
+    newEquation=[];
     document.getElementById('screen').innerHTML = '';
-}
-
-function assignResultToA() {
-    result = Number(a);
-    a = '';
-    return result, a;
+    turnOnDot();
 }
 
 function addOne(){
@@ -65,57 +62,121 @@ function addZero(){
     equation +='0';
     }    
 
+
 function addPlus(){
-   if (typeof (result) == 'number') {
-        result = result + Number(a);
-        document.getElementById('screen').innerHTML = result;
-        a='';
-        turnOnDot();
-        return result, a;
-    } else {
-        equation += '+';
-        assignResultToA();
-        turnOnDot
-    }}
+
+    devideEquation();
+
+    switch (newEquation.length){
+        case 0 :
+            clear();
+
+        case 1: 
+            a = '';
+            equation += ' + ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 2:
+            a = '';
+            equation = equation.slice(-3);
+            equation += ' + ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 3:
+            solution();
+    }
+}
 
 function addMinus(){
-    if (typeof (result) == 'number') {
-        result = result - Number(a);
-        document.getElementById('screen').innerHTML = result;
-        a='';
-        turnOnDot();
-        return result, a;
-    } else {
-        equation += '-';
-        assignResultToA();
-        turnOnDot();
-    }}
+
+    devideEquation();
+
+    switch (newEquation.length){
+        case 0 :
+            clear();
+
+        case 1: 
+            a = '';
+            equation += ' - ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 2:
+            a = '';
+            equation = equation.slice(-3);
+            equation += ' - ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 3:
+            solution();
+    }
+ }
 
 function addMultiply(){
-    if (typeof (result) == 'Number') {
-        result = Number(result) * Number(a);
-        document.getElementById('screen').innerHTML = result;
-        a='';
-        turnOnDot();
-        return result, a;
-    } else {
-        equation += '*';
-        assignResultToA();
-        turnOnDot();
-    }}
+
+    devideEquation();
+
+    switch (newEquation.length){
+        case 0 :
+            clear();
+
+        case 1: 
+            a = '';
+            equation += ' * ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 2:
+            a = '';
+            equation = equation.slice(-3);
+            equation += ' * ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 3:
+            solution();
+    }
+
+    }
 
 function addDivision(){
-    if (typeof (result) == 'Number') {
-        result = Number(result) / Number(a);
-        document.getElementById('screen').innerHTML = result;
-        a='';
-        turnOnDot();
-        return result, a;
-    } else {
-        equation += '/';
-        assignResultToA();
-        turnOnDot();
-    }}
+
+    devideEquation();
+
+    switch (newEquation.length){
+        case 0 :
+            clear();
+
+        case 1: 
+            a = '';
+            document.getElementById('screen').innerHTML = a;
+            equation += ' / ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 2:
+            a = '';
+            document.getElementById('screen').innerHTML = a;
+            equation = equation.slice(-3);
+            equation += ' / ';
+            checkDot();
+            console.log(equation);
+            return a, equation;
+
+        case 3:
+            solution();
+    }
+    }
 
 function addDot(){
     a += '.'
@@ -125,17 +186,89 @@ function addDot(){
     }
 
 function operate(){
-    equation += '=';
-    document.getElementById('screen').innerHTML = equation;
-    turnOnDot();
+
+    devideEquation();
+
+    switch (newEquation.length){
+        case 0 :
+            clear();
+
+        case 1: 
+            document.getElementById('screen').innerHTML = newEquation[0];
+            equation = newEquation[0].toString();;
+            checkDot();
+            console.log(equation);
+            return equation;
+
+        case 2:
+            document.getElementById('screen').innerHTML = newEquation[0];
+            equation = newEquation[0].toString;
+            checkDot();
+            console.log(equation);
+            return equation;
+
+        case 3:
+            solution();
+    }                  
+    }
+
+function devideEquation(){
+newEquation = equation.split(' ');
+    return newEquation;
 }
+
+
+function solution(){
+    console.log(equation);
+    switch(newEquation[1]){
+        case '+' :
+            result = Number(newEquation[0]) + Number(newEquation[2]);
+            result = Math.round(result * 1000000000000) / 1000000000000 ;
+            document.getElementById('screen').innerHTML = result;
+            a = '';
+            equation = result.toString();
+            console.log(equation);
+            return equation, a;
+            
+        case '-' :
+            result = Number(newEquation[0]) - Number(newEquation[2])
+            result = Math.round(result * 1000000000000) / 1000000000000 ;
+            document.getElementById('screen').innerHTML = result;
+            a = '';
+            equation = result.toString();
+            console.log(equation);
+            return equation, a;
+
+        case '*' :
+            result = Number(newEquation[0]) * Number(newEquation[2])
+            result = Math.round(result * 1000000000000) / 1000000000000 ;
+            document.getElementById('screen').innerHTML = result;
+            a = '';
+            equation = result.toString();
+            console.log(equation);
+            return equation, a;
+
+        case '/' :
+            if (newEquation[2] = '0'){
+            alert('Nie dziel przez zero!');
+            clear();
+            } else {
+            result = Number(newEquation[0]) / Number(newEquation[2])
+            result = Math.round(result * 1000000000000) / 1000000000000 ;
+            document.getElementById('screen').innerHTML = result;
+            a = '';
+            equation = result.toString();
+            console.log(equation);
+            return equation, a;
+    }}
+}
+
 
 function backspace() {
     a = document.getElementById('screen').innerHTML
     a = a.slice(0,-1);
     document.getElementById('screen').innerHTML = a;
-
-
+    checkDot();
 }
 
 function turnOnDot(){
@@ -146,8 +279,11 @@ function turnOffDot(){
     document.getElementById('.').removeEventListener('click',addDot);
 }
 
-
-
+function checkDot() {
+    a.toString;
+    a.includes('.') ? turnOffDot : turnOnDot();
+};
+window.onload = clear();
 document.getElementById('1').addEventListener('click',addOne);
 document.getElementById('2').addEventListener('click',addTwo);
 document.getElementById('3').addEventListener('click',addThree);
